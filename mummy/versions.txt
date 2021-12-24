@@ -1,0 +1,7 @@
+Mummy1: The very first version
+
+Mummy2: 
+  Mummy2windows: The reversed version of Mummy games for Windows OS
+  Mummy2linux: Isn't ready:(
+
+Mummy1Debug1: The first debug version of 1.
