@@ -160,19 +160,22 @@ void game(){
 		} 
 		dead.clear();
 		for(int i=1;i<7;i++){
-			if(pls[i].alive==1){
-				int rnd=rand()%7;
+			if(pls[i].alive == 1){
+				int rnd = rand()%7;
 				endt = startt = time(0);
 				while(pls[rnd].alive==0 || rnd==i ||(pls[i].type==1 && pls[rnd].type==1)){
 					endt = time(0);
-					rnd=rand()%7;
+					rnd = rand()%7;
 					if(endt - startt >= 3){
 						cout<<"ERROR 0198:RUNTIME LIMITED\n";
-						return;
+						rnd = 7;
 					}
 				}
-				cout<<"我认为 "<<rnd+1<<" 号是狼人。\n";Sleep(300);
-				pls[rnd].pre++;
+				if(rnd<7){
+					cout<<"我认为 "<<rnd+1<<" 号是狼人。\n";Sleep(300);
+					pls[rnd].pre++;
+				}
+				
 			}
 		}
 		print("投票 :\n");
@@ -186,39 +189,41 @@ void game(){
 		cout<<endl;
 		Sleep(500);
 		print("最终结果：");
-		int wwpn,wwp=-1,same=0;;
+		int wwpn,wwp = -1,same = 0;;
 		for(int i=0;i<7;i++){
 			cout<<"\n"<<i+1<<"号："<<pls[i].pre<<"分"; 
 			Sleep(100);
-			if((pls[i].pre>wwp)){
+			if((pls[i].pre > wwp)){
 				wwpn=i;wwp=pls[i].pre;
-				same=0;
+				same = 0;
 			}
-			else if((pls[i].pre==wwp)){
-				same=1;
+			else if((pls[i].pre == wwp)){
+				same = 1;
 			}
-			pls[i].pre=0;
+			pls[i].pre = 0;
 		}
 		Sleep(200);
-		if(same==0){
+		if(same == 0){
 			cout<<"\n";
 			cout<<wwpn+1;
-			print("号已被歼灭！\n");
-			pls[wwpn].alive=0;
+			print("号已被歼灭！他");
+			if(pls[wwpn].type != 1) print("不");
+			print("是狼人！\n");
+			pls[wwpn].alive = 0;
 			ctp[pls[wwpn].type]--;
 			alrd.insert(wwpn);
 		}
-		else if(same==1) print("\n平局！\n");
+		else if(same) print("\n平局！\n");
 		print("还剩");cout<<ctp[1];print("个狼人！\n");
-		if(wwpn==0){
+		if(wwpn == 0 && same == 0){
 			print("你被投死了！");
-			pls[0].type=0;
+			pls[0].type = 0;
 		}
-		if(ctp[1]<=0){
+		if(ctp[1] <= 0){
 			print("平民获胜！");
 			return ;
 		}
-		if((ctp[0]+ctp[1]+ctp[2]) <= ctp[1] || ctp[0]<=0){
+		if((ctp[0]+ctp[1]+ctp[2]) <= ctp[1] || ctp[0] <= 0){
 			print("狼人获胜！");
 			return ;
 		}
