@@ -12,3 +12,9 @@ Clone the repo, and simply run `ljmcGameCenterV0.1.exe`, a menu will be displaye
 All source codes can be found in the corresponding sub-directories.  
 
 There is no instructional documents, just try the games!  
+
+## V1.2 （2022元旦新作品）  
+
+1. Run `LGC-1-2.exe` to unzip the source code  
+2. Compile .dev file  
+3. Run `cleanFile.bat` to clean up temp files  
